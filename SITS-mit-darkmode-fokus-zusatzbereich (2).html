@@ -1,0 +1,916 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Skalecki IT-Services – Romeo Skalecki</title>
+<style>
+    :root {
+      --main-color: #1d1d1f;
+      --accent-color: #0071e3;
+      --light-bg: #ffffff;
+      --dark-bg: #1d1d1f;
+      --light-text: #1d1d1f;
+      --dark-text: #f5f5f7;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--light-bg);
+      color: var(--light-text);
+      line-height: 1.6;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.dark-mode {
+      background-color: var(--dark-bg);
+      color: var(--dark-text);
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background-color: inherit;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .branding {
+      display: flex;
+      align-items: center;
+    }
+
+    .branding img {
+      height: 40px;
+      margin-right: 15px;
+    }
+
+    .branding span {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .menu-toggle {
+      font-size: 28px;
+      cursor: pointer;
+      display: block;
+    }
+
+    nav {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 70px;
+      right: 20px;
+      background: inherit;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: inherit;
+      margin: 10px 0;
+    }
+
+    nav.show {
+      display: flex;
+    }
+
+    .control-bar {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      padding: 10px 20px;
+      background: #f0f0f0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .control-bar button {
+      padding: 6px 12px;
+      font-size: 14px;
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .control-bar button:hover {
+      background-color: #005bb5;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 100px 20px 60px;
+      background-color: #f5f5f7;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+    }
+
+    .hero p {
+      font-size: 20px;
+      color: #666;
+      margin-top: 10px;
+    }
+
+    .button-blue {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 12px 24px;
+      background-color: #0071e3;
+      color: #fff;
+      font-size: 16px;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+
+    .section {
+      max-width: 1000px;
+      margin: 80px auto;
+      padding: 0 20px;
+    }
+
+    .section h2 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .section p {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 20px;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 16px;
+      color: #555;
+    }
+
+    .image-section img {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      background-color: #f5f5f7;
+      font-size: 14px;
+      color: #777;
+    }
+  
+
+/* Animations from animated version */
+
+    :root {
+      --accent: #0071e3;
+      --bg-light: #ffffff;
+      --bg-dark: #1d1d1f;
+      --text-light: #1d1d1f;
+      --text-dark: #f5f5f7;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg-light);
+      color: var(--text-light);
+      transition: background-color 0.4s, color 0.4s;
+      scroll-behavior: smooth;
+    }
+
+    body.dark {
+      background: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background: inherit;
+      z-index: 1000;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .branding {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      animation: fadeInDown 1s ease-out;
+    }
+
+    .branding img {
+      height: 50px;
+    }
+
+    .branding h1 {
+      font-size: 26px;
+      font-weight: bold;
+      color: var(--accent);
+    }
+
+    .burger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .burger div {
+      width: 25px;
+      height: 3px;
+      background-color: var(--accent);
+      margin: 4px 0;
+      transition: 0.4s;
+    }
+
+    nav {
+      display: flex;
+      gap: 25px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: inherit;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    .hero {
+      text-align: center;
+      padding: 100px 20px 60px;
+      background: #f5f5f7;
+      animation: fadeIn 1.2s ease;
+    }
+
+    body.dark .hero {
+      background: #2c2c2c;
+    }
+
+    .hero h2 {
+      font-size: 48px;
+      margin-bottom: 10px;
+      animation: slideInUp 1s ease;
+    }
+
+    .hero p {
+      font-size: 20px;
+      color: #666;
+    }
+
+    .section {
+      max-width: 1000px;
+      margin: 60px auto;
+      padding: 0 20px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s ease forwards;
+      animation-delay: 0.4s;
+    }
+
+    .section h3 {
+      margin-bottom: 20px;
+      font-size: 28px;
+      color: var(--accent);
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #005bb5;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 14px;
+      background: #f5f5f7;
+    }
+
+    body.dark footer {
+      background: #1a1a1a;
+    }
+
+    .controls {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+      z-index: 1001;
+    }
+
+    .controls button {
+      background: var(--accent);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 5px;
+      border: none;
+      font-size: 14px;
+    }
+
+    @keyframes fadeIn {
+      0% {opacity: 0;}
+      100% {opacity: 1;}
+    }
+
+    @keyframes fadeInUp {
+      0% {opacity: 0; transform: translateY(30px);}
+      100% {opacity: 1; transform: translateY(0);}
+    }
+
+    @keyframes fadeInDown {
+      0% {opacity: 0; transform: translateY(-30px);}
+      100% {opacity: 1; transform: translateY(0);}
+    }
+
+    @keyframes slideInUp {
+      from {transform: translateY(60px);}
+      to {transform: translateY(0);}
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        position: absolute;
+        top: 80px;
+        right: 40px;
+        flex-direction: column;
+        background: #fff;
+        border: 1px solid #ccc;
+        padding: 15px;
+        display: none;
+      }
+
+      body.dark nav {
+        background: #2c2c2c;
+      }
+
+      .burger {
+        display: flex;
+      }
+
+      nav.active {
+        display: flex;
+        animation: fadeIn 0.3s ease;
+      }
+    }
+  
+.burger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  margin-left: auto;
+}
+.burger div {
+  width: 25px;
+  height: 3px;
+  background-color: var(--accent-color);
+  margin: 4px 0;
+  transition: 0.4s;
+}
+@media (max-width: 768px) {
+  nav {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    background: var(--light-bg);
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+  body.dark nav {
+    background: var(--dark-bg);
+  }
+  nav.show {
+    display: flex;
+  }
+  .burger {
+    display: flex;
+  }
+}
+
+body.dark .card {
+  background: #2c2c2c;
+  color: #f5f5f7;
+}
+
+header {
+  justify-content: center !important;
+}
+
+body.dark .control-bar {
+  background: #2c2c2c;
+  color: #f5f5f7;
+}
+body.dark input, 
+body.dark textarea {
+  background: #3a3a3a;
+  color: #f5f5f7;
+  border-color: #555;
+}
+body.dark .form-group,
+body.dark #contact {
+  background: #2c2c2c;
+  color: #f5f5f7;
+}
+</style>
+<style>
+.packet {
+  animation: pulse 2s ease-in-out infinite;
+  filter: url(#glow);
+  transition: cy 0.3s ease, opacity 0.3s ease;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.4); }
+}
+
+#lineGroup line {
+  stroke: #0071e3;
+  stroke-width: 2;
+  opacity: 0.6;
+  transition: y1 0.3s ease, y2 0.3s ease, opacity 0.3s ease;
+}
+</style>
+<style>
+  body.dark #zwischenbereich, body.dark #zusatzbereich {
+    background-color: #121212 !important;
+    color: #e0e0e0 !important;
+  }
+
+  body.dark #zwischenbereich p, body.dark #zusatzbereich p, body.dark #zwischenbereich h2, body.dark #zusatzbereich h2 {
+    color: #e0e0e0 !important;
+  }
+
+  /* Wolke in Dark Mode weiß und leicht leuchtend */
+  body.dark #zusatzbereich svg#cloudLockSVG #cloud path {
+    fill: #f0f0f0 !important;
+    filter: drop-shadow(0 0 8px #ffffffcc);
+    transition: fill 0.5s ease;
+  }
+
+  /* Blitz-Effekt: leichte, kurzzeitige Helligkeit animieren */
+  @keyframes lightning {
+    0%, 100% { filter: drop-shadow(0 0 8px #ffffffcc); }
+    50% { filter: drop-shadow(0 0 20px #ffffffee); }
+  }
+  body.dark #zusatzbereich svg#cloudLockSVG #cloud path {
+    animation: lightning 3s infinite ease-in-out;
+  }
+
+  /* Skyline dunkler und mit weißen Lichtern (vereinfachte) */
+  body.dark #zusatzbereich svg polygon, 
+  body.dark #zusatzbereich svg rect, 
+  body.dark #zusatzbereich svg ellipse {
+    fill: #222 !important;
+  }
+  body.dark #zusatzbereich svg polygon:nth-child(odd), 
+  body.dark #zusatzbereich svg rect:nth-child(odd), 
+  body.dark #zusatzbereich svg ellipse:nth-child(odd) {
+    fill: #444 !important;
+  }
+
+  /* Weiß leuchtende Fenster (rechteckige Flächen) simulieren */
+  body.dark #zusatzbereich svg rect:nth-child(even) {
+    fill: #eee !important;
+    filter: drop-shadow(0 0 6px #fff9);
+  }
+</style>
+</head>
+<body>
+<header>
+<div class="branding" style="margin: 0 auto; text-align: center; flex-grow: 1; justify-content: center;">
+<img alt="Skalecki Logo" src="logo.png"/>
+<span style="font-size: 32px; font-weight: bold; text-align: center; width: 100%;">Skalecki IT-Services</span>
+</div>
+<div class="menu-toggle" onclick="toggleMenu()">☰</div>
+<nav class="" id="nav">
+<a href="#info">Info</a>
+<a href="#leistungen">Leistungen</a>
+<a href="#rechenzentrum">Rechenzentrum</a>
+<a href="#kontakt">Kontakt</a>
+<a href="https://wa.me/TELEFONNUMMER?text=Hallo%20Romeo%2C%20ich%20habe%20deine%20Website%20gesehen%20und%20interessiere%20mich%20f%C3%BCr%20deine%20Serverdienste.">WhatsApp</a>
+</nav>
+</header>
+<div class="control-bar">
+<button onclick="toggleDarkMode()">Dark Mode</button>
+<button onclick="switchLang()">EN / DE</button>
+</div>
+<section class="hero">
+<h1 id="slogan">Intelligente Serverlösungen – Von Frankfurt in die Cloud</h1>
+<p id="intro">Moderne Infrastruktur, persönlich umgesetzt von Romeo Skalecki</p>
+<a class="button-blue" href="#kontakt" id="ctaButton">Jetzt Kontakt aufnehmen</a>
+</section>
+<section class="section" id="zwischenbereich" style="background: #e0e0e0; padding: 100px 20px; text-align: center;">
+<h2 style="font-size: 40px; margin-bottom: 20px;">Skalecki IT im Fokus</h2>
+<p style="font-size: 22px; max-width: 800px; margin: 0 auto;">
+    Vertrauen, Effizienz und eine persönliche Note – dafür steht Skalecki IT-Services. 
+    Wir kombinieren technische Exzellenz mit direkter Kommunikation und sorgen dafür, 
+    dass deine Server nicht nur laufen, sondern performen.
+  </p>
+</section>
+<section class="section" id="zusatzbereich" style="background: #ffffff; padding: 280px 20px 100px; min-height: 600px; text-align: center;"><svg height="700" id="cloudLockSVG" style="cursor: pointer; position: relative; transform: translateY(-50px);" viewbox="0 0 200 200" width="700">
+<defs>
+<filter height="140%" id="shadow" width="140%" x="-20%" y="-20%">
+<fedropshadow dx="0" dy="4" flood-color="#000000" flood-opacity="0.25" stddeviation="4"></fedropshadow>
+</filter>
+</defs>
+<!-- Wolke -->
+<g filter="url(#shadow)" id="cloud" style="opacity:1; transition: opacity 0.6s ease;">
+<path d="M40 100
+             C 35 80, 60 60, 80 70
+             C 85 50, 130 50, 135 80
+             C 150 80, 160 100, 145 110
+             C 140 130, 100 125, 80 120
+             C 60 130, 45 120, 40 100 Z" fill="#555"></path>
+</g>
+<!-- Schloss -->
+<g filter="url(#shadow)" id="lock" style="opacity:0; transition: opacity 0.6s ease; transform-origin: 50% 70%;">
+<rect fill="#c0392b" height="50" rx="12" ry="12" width="60" x="70" y="90"></rect>
+<rect fill="#e74c3c" height="30" rx="10" ry="10" width="20" x="90" y="65"></rect>
+<circle cx="100" cy="110" fill="#ecf0f1" r="8"></circle>
+</g>
+</svg><svg id="flowPacketsSVG" preserveaspectratio="xMidYMid meet" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:5;" viewbox="0 0 800 600"><circle class="small-packet" cx="82" cy="550" fill="#0071e3" opacity="0.6" r="20"></circle><circle class="small-packet" cx="80" cy="490" fill="#0071e3" opacity="0.6" r="20"></circle><circle class="small-packet" cx="145" cy="430" fill="#0071e3" opacity="0.6" r="20"></circle><circle class="small-packet" cx="273" cy="370" fill="#0071e3" opacity="0.6" r="20"></circle><circle class="small-packet" cx="288" cy="310" fill="#0071e3" opacity="0.6" r="20"></circle><circle class="small-packet" cx="567" cy="250" fill="#0071e3" opacity="0.6" r="20"></circle><circle class="small-packet" cx="666" cy="190" fill="#0071e3" opacity="0.6" r="20"></circle><circle class="small-packet" cx="77" cy="130" fill="#0071e3" opacity="0.6" r="20"></circle><circle class="small-packet" cx="624" cy="70" fill="#0071e3" opacity="0.6" r="20"></circle><circle class="small-packet" cx="253" cy="10" fill="#0071e3" opacity="0.6" r="20"></circle><circle cx="82" cy="550" fill="#0071e3" id="big-packet" opacity="1" r="30"></circle></svg>
+<!-- Fluffige, mittig platzierte Wolken im SVG -->
+<div style="width: 100%; height: 200px; display: flex; justify-content: center; align-items: flex-start; margin-top: -160px; position: relative; z-index: 1;">
+</div>
+<div style="width: 100%; height: 300px; display: flex; justify-content: center; align-items: flex-end;">
+<svg height="100%" preserveaspectratio="xMidYMax meet" viewbox="0 0 1200 300" width="100%">
+<!-- Gebäude mit verschiedenen Dachformen -->
+<!-- Spitzdach -->
+<polygon fill="#1d1d1f" points="50,80 75,30 100,80"></polygon>
+<rect fill="#1d1d1f" height="220" width="50" x="50" y="80"></rect>
+<!-- Runddach -->
+<rect fill="#1d1d1f" height="170" width="40" x="120" y="130"></rect>
+<ellipse cx="140" cy="130" fill="#1d1d1f" rx="20" ry="10"></ellipse>
+<!-- Flachdach -->
+<rect fill="#1d1d1f" height="200" width="50" x="180" y="100"></rect>
+<!-- Pultdach -->
+<polygon fill="#1d1d1f" points="250,140 285,120 285,140"></polygon>
+<rect fill="#1d1d1f" height="160" width="35" x="250" y="140"></rect>
+<!-- Spitzdach -->
+<polygon fill="#1d1d1f" points="300,160 315,140 330,160"></polygon>
+<rect fill="#1d1d1f" height="140" width="30" x="300" y="160"></rect>
+<!-- Satteldach -->
+<polygon fill="#1d1d1f" points="340,100 355,80 370,100"></polygon>
+<rect fill="#1d1d1f" height="200" width="30" x="340" y="100"></rect>
+<!-- Runddach -->
+<rect fill="#1d1d1f" height="150" width="25" x="380" y="150"></rect>
+<ellipse cx="392.5" cy="150" fill="#1d1d1f" rx="12.5" ry="8"></ellipse>
+<!-- Flachdach -->
+<rect fill="#1d1d1f" height="170" width="30" x="410" y="130"></rect>
+<!-- Spitzdach -->
+<polygon fill="#1d1d1f" points="480,160 490,140 500,160"></polygon>
+<rect fill="#1d1d1f" height="140" width="20" x="480" y="160"></rect>
+<!-- Pultdach -->
+<polygon fill="#1d1d1f" points="510,120 550,110 550,120"></polygon>
+<rect fill="#1d1d1f" height="180" width="40" x="510" y="120"></rect>
+<!-- Flachdach -->
+<rect fill="#1d1d1f" height="200" width="35" x="560" y="100"></rect>
+<!-- Runddach -->
+<rect fill="#1d1d1f" height="170" width="25" x="610" y="130"></rect>
+<ellipse cx="622.5" cy="130" fill="#1d1d1f" rx="12.5" ry="8"></ellipse>
+<!-- Spitzdach -->
+<polygon fill="#1d1d1f" points="650,150 665,130 680,150"></polygon>
+<rect fill="#1d1d1f" height="150" width="30" x="650" y="150"></rect>
+<!-- Satteldach -->
+<polygon fill="#1d1d1f" points="690,140 707.5,120 725,140"></polygon>
+<rect fill="#1d1d1f" height="160" width="35" x="690" y="140"></rect>
+<!-- Flachdach -->
+<rect fill="#1d1d1f" height="180" width="40" x="740" y="120"></rect>
+<!-- Runddach -->
+<rect fill="#1d1d1f" height="140" width="30" x="790" y="160"></rect>
+<ellipse cx="805" cy="160" fill="#1d1d1f" rx="15" ry="8"></ellipse>
+<!-- Spitzdach -->
+<polygon fill="#1d1d1f" points="830,110 852.5,90 875,110"></polygon>
+<rect fill="#1d1d1f" height="190" width="45" x="830" y="110"></rect>
+<!-- Flachdach -->
+<rect fill="#1d1d1f" height="170" width="35" x="890" y="130"></rect>
+<!-- Pultdach -->
+<polygon fill="#1d1d1f" points="940,150 965,130 965,150"></polygon>
+<rect fill="#1d1d1f" height="150" width="25" x="940" y="150"></rect>
+<!-- Runddach -->
+<rect fill="#1d1d1f" height="160" width="30" x="980" y="140"></rect>
+<ellipse cx="995" cy="140" fill="#1d1d1f" rx="15" ry="10"></ellipse>
+<!-- Satteldach -->
+<polygon fill="#1d1d1f" points="1020,130 1035,110 1050,130"></polygon>
+<rect fill="#1d1d1f" height="170" width="30" x="1020" y="130"></rect>
+<!-- Flachdach -->
+<rect fill="#1d1d1f" height="180" width="30" x="1050" y="120"></rect>
+<!-- Spitzdach -->
+<polygon fill="#1d1d1f" points="1090,140 1110,120 1130,140"></polygon>
+<rect fill="#1d1d1f" height="160" width="35" x="1090" y="140"></rect>
+<!-- Flachdach -->
+<rect fill="#1d1d1f" height="200" width="40" x="1140" y="100"></rect>
+</svg>
+</div>
+</section>
+<section class="section" id="info">
+<h2 id="aboutTitle">Über mich</h2>
+<p id="bio">Ich bin Romeo Skalecki, 18 Jahre alt, Schüler des Gymnasiums Riedberg in Frankfurt. Seit meiner frühen Jugend interessiere ich mich für IT-Infrastruktur und Servermanagement. Heute betreue ich V-Server im Rechenzentrum FRA7 – mit Fokus auf Effizienz, Sicherheit und individueller Betreuung.</p>
+</section>
+<section class="section" id="leistungen">
+<h2 id="servicesTitle">Leistungen</h2>
+<div class="grid">
+<div class="card">
+<h3 id="vserverTitle">V-Server Einrichtung</h3>
+<p id="vserverDesc">Professionelle Einrichtung und Konfiguration leistungsstarker virtueller Server auf Linux-Basis.</p>
+</div>
+<div class="card">
+<h3 id="maintenanceTitle">Serverwartung</h3>
+<p id="maintenanceDesc">Monitoring, Updates, Backup-Strategien und Sicherheit – alles aus einer Hand.</p>
+</div>
+<div class="card">
+<h3 id="hostonTitle">Host-On Integration</h3>
+<p id="hostonDesc">Direkte Partnerschaft mit Host-On – Zugriff auf Infrastruktur im FRA7 Rechenzentrum.</p>
+</div>
+<div class="card">
+<h3 id="consultTitle">Beratung &amp; Optimierung</h3>
+<p id="consultDesc">Systemanalyse, Performance-Tuning und langfristige Planung für skalierbare Lösungen.</p>
+</div>
+</div>
+</section>
+<section class="section image-section" id="rechenzentrum">
+<h2 id="datacenterTitle">Rechenzentrum FRA7</h2>
+<p>Unsere Server stehen im Hochleistungszentrum FRA7 in Frankfurt. Maximale Sicherheit und Verfügbarkeit – lokal und effizient.</p>
+<img alt="Rechenzentrum Frankfurt" src="https://images.unsplash.com/photo-1581093588401-4c4d3ce91c49?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80"/>
+</section>
+<section class="section" id="kontakt">
+<h2 id="contactTitle">Kontakt</h2>
+<p>E-Mail: <a href="mailto:skalecki.itservice@gmail.com">skalecki.itservice@gmail.com</a></p>
+<p>WhatsApp: <a href="https://wa.me/TELEFONNUMMER">Jetzt schreiben</a></p>
+<p>Standort: Frankfurt am Main</p>
+</section>
+<section class="section" id="contact">
+<h3 id="contactTitle">Schnellanfrage</h3>
+<form>
+<div class="form-group">
+<input id="nameInput" placeholder="Dein Name" required="" type="text"/>
+</div>
+<div class="form-group">
+<textarea id="messageInput" placeholder="Deine Nachricht" required="" rows="4"></textarea>
+</div>
+<button type="submit">Senden</button>
+</form>
+</section><footer>
+  © 2025 Skalecki IT-Services – Romeo Skalecki
+</footer>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const menuToggle = document.querySelector(".menu-toggle");
+  const nav = document.getElementById("nav");
+
+  let menuOpen = false;
+
+  if (menuToggle && nav) {
+    menuToggle.addEventListener("click", () => {
+      menuOpen = !menuOpen;
+      nav.style.display = menuOpen ? "flex" : "none";
+    });
+
+    // Menü schließen beim Klicken auf einen Link
+    nav.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        menuOpen = false;
+        nav.style.display = "none";
+      });
+    });
+  }
+});
+
+function toggleDarkMode() {
+  document.body.classList.toggle("dark");
+}
+
+function switchLang() {
+  const isGerman = document.documentElement.lang === "de";
+  document.documentElement.lang = isGerman ? "en" : "de";
+  document.getElementById("slogan").textContent = isGerman
+    ? "Intelligent Server Solutions – From Frankfurt to the Cloud"
+    : "Intelligente Serverlösungen – Von Frankfurt in die Cloud";
+  document.getElementById("intro").textContent = isGerman
+    ? "Modern infrastructure, personally managed by Romeo Skalecki"
+    : "Moderne Infrastruktur, persönlich umgesetzt von Romeo Skalecki";
+  document.getElementById("bio").textContent = isGerman
+    ? "I'm Romeo Skalecki, 18 years old, a student at Gymnasium Riedberg in Frankfurt. From a young age I've been passionate about IT infrastructure and server management. Today I manage V-Servers at the FRA7 data center – with a focus on efficiency, security and personalized support."
+    : "Ich bin Romeo Skalecki, 18 Jahre alt, Schüler des Gymnasiums Riedberg in Frankfurt. Seit meiner frühen Jugend interessiere ich mich für IT-Infrastruktur und Servermanagement. Heute betreue ich V-Server im Rechenzentrum FRA7 – mit Fokus auf Effizienz, Sicherheit und individueller Betreuung.";
+  let serviceTitle = document.getElementById("servicesTitle");
+  if (serviceTitle) serviceTitle.textContent = isGerman ? "Our Services" : "Unsere Leistungen";
+  let contactTitle = document.getElementById("contactTitle");
+  if (contactTitle) contactTitle.textContent = isGerman ? "Quick Inquiry" : "Schnellanfrage";
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const menuToggle = document.querySelector(".menu-toggle");
+  const nav = document.getElementById("nav");
+  let menuOpen = false;
+
+  if (menuToggle && nav) {
+    menuToggle.addEventListener("click", () => {
+      menuOpen = !menuOpen;
+      nav.style.display = menuOpen ? "flex" : "none";
+    });
+
+    nav.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        menuOpen = false;
+        nav.style.display = "none";
+      });
+    });
+  }
+});
+
+function switchLang() {
+  const isGerman = document.documentElement.lang === "de";
+  document.documentElement.lang = isGerman ? "en" : "de";
+
+  document.getElementById("slogan").textContent = isGerman
+    ? "Intelligent Server Solutions – From Frankfurt to the Cloud"
+    : "Intelligente Serverlösungen – Von Frankfurt in die Cloud";
+  document.getElementById("intro").textContent = isGerman
+    ? "Modern infrastructure, personally managed by Romeo Skalecki"
+    : "Moderne Infrastruktur, persönlich umgesetzt von Romeo Skalecki";
+  document.getElementById("bio").textContent = isGerman
+    ? "I'm Romeo Skalecki, 18 years old, a student at Gymnasium Riedberg in Frankfurt. From a young age I've been passionate about IT infrastructure and server management. Today I manage V-Servers at the FRA7 data center – with a focus on efficiency, security and personalized support."
+    : "Ich bin Romeo Skalecki, 18 Jahre alt, Schüler des Gymnasiums Riedberg in Frankfurt. Seit meiner frühen Jugend interessiere ich mich für IT-Infrastruktur und Servermanagement. Heute betreue ich V-Server im Rechenzentrum FRA7 – mit Fokus auf Effizienz, Sicherheit und individueller Betreuung.";
+
+  document.getElementById("aboutTitle").textContent = isGerman ? "About Me" : "Über mich";
+  document.getElementById("servicesTitle").textContent = isGerman ? "Services" : "Leistungen";
+  document.getElementById("datacenterTitle").textContent = isGerman ? "Data Center FRA7" : "Rechenzentrum FRA7";
+  document.getElementById("contactTitle").textContent = isGerman ? "Quick Inquiry" : "Schnellanfrage";
+
+  document.getElementById("nameInput").placeholder = isGerman ? "Your Name" : "Dein Name";
+  document.getElementById("messageInput").placeholder = isGerman ? "Your Message" : "Deine Nachricht";
+}
+
+  document.getElementById("vserverTitle").textContent = isGerman ? "V-Server Setup" : "V-Server Einrichtung";
+  document.getElementById("vserverDesc").textContent = isGerman ? "Professional setup and configuration of powerful virtual servers based on Linux." : "Professionelle Einrichtung und Konfiguration leistungsstarker virtueller Server auf Linux-Basis.";
+
+  document.getElementById("maintenanceTitle").textContent = isGerman ? "Server Maintenance" : "Serverwartung";
+  document.getElementById("maintenanceDesc").textContent = isGerman ? "Monitoring, updates, backup strategies and security – all from one source." : "Monitoring, Updates, Backup-Strategien und Sicherheit – alles aus einer Hand.";
+
+  document.getElementById("hostonTitle").textContent = isGerman ? "Host-On Integration" : "Host-On Integration";
+  document.getElementById("hostonDesc").textContent = isGerman ? "Direct partnership with Host-On – access to infrastructure in FRA7 data center." : "Direkte Partnerschaft mit Host-On – Zugriff auf Infrastruktur im FRA7 Rechenzentrum.";
+
+  document.getElementById("consultTitle").textContent = isGerman ? "Consulting & Optimization" : "Beratung & Optimierung";
+  document.getElementById("consultDesc").textContent = isGerman ? "System analysis, performance tuning and long-term planning for scalable solutions." : "Systemanalyse, Performance-Tuning und langfristige Planung für skalierbare Lösungen.";
+
+  document.getElementById("ctaButton").textContent = isGerman ? "Contact Now" : "Jetzt Kontakt aufnehmen";
+</script>
+<script>
+const bigPacket = document.getElementById("big-packet");
+const smallPackets = document.querySelectorAll(".small-packet");
+
+const startXArr = [82, 80, 145, 273, 288, 567, 666, 77, 624, 253];
+const startY = 550;
+const endX = 400;
+const endY = 100;
+
+let startTime = null;
+const bigDuration = 1000; // 1 Sekunde großer Ball
+const smallDuration = 14000; // 14 Sekunden kleine Bälle
+
+function lerp(start, end, t) {
+  return start + (end - start) * t;
+}
+
+function animate(timestamp) {
+  if (!startTime) startTime = timestamp;
+  const elapsed = timestamp - startTime;
+
+  // Big Packet: fließende Bewegung
+  let bigProgress = (elapsed % bigDuration) / bigDuration;
+  let bigCurrentX = lerp(startXArr[0], endX, bigProgress);
+  let bigCurrentY = lerp(startY, endY, bigProgress);
+  bigPacket.setAttribute("cx", bigCurrentX);
+  bigPacket.setAttribute("cy", bigCurrentY);
+  bigPacket.setAttribute("opacity", 1 - bigProgress);
+
+  // Kleine Pakete: fließend mit zeitlichen Versätzen
+  smallPackets.forEach((packet, i) => {
+    let offset = i * (smallDuration / smallPackets.length);
+    let smallElapsed = (elapsed + offset) % smallDuration;
+    let smallProgress = smallElapsed / smallDuration;
+    let smallCurrentX = lerp(startXArr[i], endX, smallProgress);
+    let smallCurrentY = lerp(startY, endY, smallProgress);
+    let opacity = 0.6 * (1 - smallProgress);
+    packet.setAttribute("cx", smallCurrentX);
+    packet.setAttribute("cy", smallCurrentY);
+    packet.setAttribute("opacity", opacity);
+  });
+  requestAnimationFrame(animate);
+}
+
+requestAnimationFrame(animate);
+</script>
+<script>
+const svg = document.getElementById("cloudLockSVG");
+const cloud = document.getElementById("cloud");
+const lock = document.getElementById("lock");
+
+let toggled = false;
+
+function smoothWiggle(elem, duration = 600, amplitude = 10, frequency = 2) {
+  let start = null;
+  function animate(timestamp) {
+    if (!start) start = timestamp;
+    let elapsed = timestamp - start;
+    let progress = elapsed / duration;
+    if (progress > 1) progress = 1;
+    let angle = amplitude * Math.sin(progress * frequency * Math.PI * 2) * (1 - progress);
+    elem.style.transform = `rotate(${angle}deg)`;
+    if (progress < 1) {
+      requestAnimationFrame(animate);
+    } else {
+      elem.style.transform = "rotate(0deg)";
+    }
+  }
+  requestAnimationFrame(animate);
+}
+
+svg.addEventListener("click", () => {
+  if (!toggled) {
+    cloud.style.opacity = 0;
+    setTimeout(() => {
+      lock.style.opacity = 1;
+      smoothWiggle(lock);
+    }, 600);
+    toggled = true;
+    setTimeout(() => {
+      lock.style.opacity = 0;
+      cloud.style.opacity = 1;
+      toggled = false;
+    }, 3000);
+  }
+});
+</script>
+</body>
+</html>
